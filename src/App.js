@@ -12,6 +12,8 @@ import React, { useState } from 'react';
 // }
 
 // When I see variables or words greyed out, I might need to pass as a prop, or use that variable
+// useStates initialized
+// Event handlers are here
 const App = () => {
   const [weather, setWeather] = useState({});
   const [query, setQuery] = useState('');

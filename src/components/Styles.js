@@ -1,15 +1,6 @@
 
 // import React, {useState} from 'react'
 
-// const Hero = (props) => {
-//     const [ heroState, setHeroState ] = useState([]) 
-
-//     return (
-//         <div>
-            
-//         </div>
-//     )
-// }
 
 // export default Hero
 

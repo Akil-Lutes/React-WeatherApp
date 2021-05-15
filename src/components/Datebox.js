@@ -26,7 +26,10 @@ const Datebox = ({ weather, setWeather }) => {
                 <div className="text-white">
                     {Datefinder(new Date())}
                 </div>
-            <h2 className="currentWeather text-white">Sunny</h2>
+                <div className="info">
+                        <img className="city-icon" src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt={weather.weather[0].description} />
+                        <p>{weather.weather[0].description}</p>
+                    </div>
             <div className="temp bg-purple-600 bg-opacity-25 text-6xl rounded-md inline-block">{Math.round(weather.main.temp)}</div>
             </div>
             )}
