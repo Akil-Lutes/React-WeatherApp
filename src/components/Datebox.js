@@ -1,40 +1,68 @@
 // import { Searchbar } from './components/Searchbar'
 
+// {Math.round(weather.main.temp)}
 
-const Datebox = ({ weather, setWeather }) => {
+export const Datebox = ({ weather, location }) => {
 
-    const Datefinder = (d) => {
-        const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 
-        'September', 'October', 'November', 'December'];
+    const dateBuilder = (d) => {
+        let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
         let day = days[d.getDay()];
         let date = d.getDate();
         let month = months[d.getMonth()];
         let year = d.getFullYear();
 
-        return `${day}, ${date} ${month} ${year}`
+        return `${day} ${date} ${month} ${year}`
+    }
+    
 
-}
-// This is where I am going to use API weather data , I think I am going to have to pass props
-    return (
-        <div className="text-white text-center bg-gray-400 bg-opacity-25 rounded-md m-auto mt-20 border-2 border-yellow-600 w-1/5 p-4 px-6">
-            {weather.main && (
-                <div>
-            <h2 className="cityName text-white inline-block border-2 border-yellow-600">{weather.name}</h2>
-            <sup>{weather.sys.country}</sup>
-                <div className="text-white">
-                    {Datefinder(new Date())}
-                </div>
-                <div className="info">
+return (
+        <div className="main-container text-white text-center bg-gray-400 bg-opacity-25 rounded-md m-auto mt-20 border-2 border-yellow-600 w-1/5 p-4 px-6">
+            {(typeof weather.main != "undefined") ? (
+                <div className="city">
+                    <h2 className="city-name">
+                        <span>{weather.name}</span>
+                        <sup>{weather.sys.country}</sup>
+                        <div className="date">{dateBuilder(new Date())}</div>
+                    </h2>
+                    <div className="city-temp">
+                        {Math.round(weather.main.temp)}
+                        <sup>&deg;F</sup>
+                    </div>
+                    <div className="info">
                         <img className="city-icon" src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt={weather.weather[0].description} />
                         <p>{weather.weather[0].description}</p>
                     </div>
-            <div className="temp bg-purple-600 bg-opacity-25 text-6xl rounded-md inline-block">{Math.round(weather.main.temp)}</div>
-            </div>
-            )}
+                </div>
+            ) : ('')}
         </div>
-    )
+    // </div>
+);
 }
+
+
+
+//     return (
+//         <div className="main-container text-white text-center bg-gray-400 bg-opacity-25 rounded-md m-auto mt-20 border-2 border-yellow-600 w-1/5 p-4 px-6">
+//             {weather.main && (
+//                 <div className="city">
+//                     <h2 className="city-name">
+//                         <span>{weather.name}</span>
+//                         <sup>{weather.sys.country}</sup>
+//                     </h2>
+//                     <div className="city-temp">
+//                         {Math.round(weather.main.temp)}
+//                         <sup>&deg;C</sup>
+//                     </div>
+//                     <div className="info">
+//                         <img className="city-icon" src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt={weather.weather[0].description} />
+//                         <p>{weather.weather[0].description}</p>
+//                     </div>
+//                 </div>
+//             )}
+//         </div>
+//     );
+// }
 
 export default Datebox

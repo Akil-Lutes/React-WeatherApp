@@ -3,48 +3,87 @@ import Navbar from './components/Navbar'
 import Searchbar from './components/Searchbar'
 // import { Styles } from './components/Styles'
 import Datebox from './components/Datebox'
-import Card from './components/Card'
-import  { fetchWeather } from './api/fetchWeather'
 import React, { useState } from 'react';
-// const divStyle = {
-//   background: Styles.background,
-//   height: '100%'
-// }
+import { fetchWeather } from './api/fetchWeather'
+// import { fetchByLocation } from './api/fetchWeather'
 
-// When I see variables or words greyed out, I might need to pass as a prop, or use that variable
-// useStates initialized
-// Event handlers are here
+
+
 const App = () => {
   const [weather, setWeather] = useState({});
   const [query, setQuery] = useState('');
+  const [location, setLocation] = useState({});
 
-  const handleChange = (e) => { setQuery(e.target.value)}
+const URL1 = 'https://api.openweathermap.org/data/2.5/weather';
+const API_KEY = 'f1d7a51506ced100c8f5175e71c783e5';
+
+  const handleChange = (e) => { 
+    setQuery(e.target.value)
+  }
+
   
   const search = async (e) => {
-    if(e.key === 'Enter') {
-        const data = await fetchWeather(query);
+    const data = await fetchWeather(query);
 
-        setWeather(data);
+    if(e.key === 'Enter') {
+        setWeather(data)
         setQuery('');
-    }
-}
+    } 
+  }
+
+  const handleClick = () => {
+    fetch(`${URL1}?q=${query}&units=imperial&APPID=${API_KEY}`)
+        .then(res => res.json())
+        .then(result => {
+          setWeather(result);
+          setQuery('');
+          console.log(result);
+        });
+    console.log("Button works");
+  }
+
+
+  const backgroundImg = (weather) => { 
+    if (typeof weather.main != "undefined") {
+      if (weather.weather[0].description === 'clear sky' || weather.weather[0].description === 'few clouds') {
+        return 'sunny'
+      } if (weather.weather[0].description === 'broken clouds' || weather.weather[0].description === 'scattered clouds') {
+        return 'cloudy'
+      } if (weather.weather[0].description === 'rain' || weather.weather[0].description === 'shower rain') {
+        return 'rain'
+      } if (weather.weather[0].description === 'thunderstorm') {
+        return 'thunderstorm'
+      } if (weather.weather[0].description === 'snow') {
+        return 'snow'
+      } else {
+        return 'app'
+      }
+    } 
+      return backgroundImg;
+  }
+
+  
 
   return (
-    <div className="app">
+    <div 
+      className={backgroundImg(weather) }
+     >
       <div>
       <Header />
       <Navbar />
-      <Searchbar query={query} search={search} handleChange={handleChange} />
-      <Datebox weather={weather} />
-      <Card
-      title="Card Title"
-      imageUrl=""
-      body="Lorem Ipsum dummy texLorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nobis vitae similique recusandae architecto blanditiis numquam optio corrupti fugit ab. Consectetur odit ullam culpa sit iusto aspernatur repellat, consequuntur distinctio."
-      />
+      <Searchbar query={query} search={search} handleChange={handleChange} handleClick={handleClick}  />
+      <Datebox weather={weather} location={location} />
       </div>
     </div>
   );
 }
 
 export default App;
+
+// ADD Default props ***************
+      
+  // return JSON.stringify(weather)
+ 
+ // try another useEffect. But I know I have to make 2 API calls for sure. promise.all (both calls will run parallel)
+
 
