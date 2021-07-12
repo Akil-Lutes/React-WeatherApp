@@ -6,7 +6,7 @@ const Searchbar = ({ query, search, handleChange, handleClick } ) => {
 
     return (
         
-        <div className="flex justify-center border-2 border-yellow-600 p-8">
+        <div className="flex justify-center p-8">
             <div className="bg-gray-600 flex items-center rounded-full shawdow-xl border-2 border-green-400 w-4/12">
                 <input className="rounded-l-full w-10/12 py-4 px-6 text-gray-700 leading-tight focus:outline-none" id="search" type="text" placeholder="Ex. Dallas, TX, US or Zip, US " value={query} onChange={handleChange} onKeyPress={search}/>
     
