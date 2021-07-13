@@ -35,7 +35,7 @@ return (
                         <p>Now: {weather.weather[0].description}</p>
                     </div>
                     <div>Wind Speed: {weather.wind.speed}mph</div>
-                    <div>Wind Gust: {weather.wind.gust}</div>
+                    <div>Wind Gust: {weather.wind.gust}mph</div>
                 </div>
             ) : ('')}
         </div>

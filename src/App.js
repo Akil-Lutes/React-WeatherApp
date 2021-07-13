@@ -3,7 +3,7 @@ import Navbar from './components/Navbar'
 import Searchbar from './components/Searchbar'
 // import { Styles } from './components/Styles'
 import Datebox from './components/Datebox'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { fetchWeather } from './api/fetchWeather'
 // import { fetchByLocation } from './api/fetchWeather'
 
@@ -62,7 +62,25 @@ const API_KEY = 'f1d7a51506ced100c8f5175e71c783e5';
       return backgroundImg;
   }
 
-  
+  const fetchWeatherLocate = (lat = 25, lon = 25) => {
+    fetch(
+      `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${API_KEY}&units=imperial`
+    )
+      .then(res => res.json())
+      .then(result => {
+        setWeather(result)
+        // console.log(result);
+      });
+  }
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        fetchWeatherLocate(position.coords.latitude, position.coords.longitude);
+      },
+    );
+  }, []);
+
 
   return (
     <div 
@@ -71,7 +89,7 @@ const API_KEY = 'f1d7a51506ced100c8f5175e71c783e5';
       <div>
       <Header />
       <Navbar />
-      <Searchbar query={query} search={search} handleChange={handleChange} handleClick={handleClick}  />
+      <Searchbar query={query} search={search} handleChange={handleChange} handleClick={handleClick} handleClickLocate={fetchWeatherLocate}  />
       <Datebox weather={weather} location={location} />
       </div>
     </div>
