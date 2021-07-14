@@ -42,19 +42,21 @@ const API_KEY = 'f1d7a51506ced100c8f5175e71c783e5';
     console.log("Button works");
   }
 
-
+// I can nest if statement if < sunrise && > sunset ........ for night mode pictures/background
   const backgroundImg = (weather) => { 
     if (typeof weather.main != "undefined") {
       if (weather.weather[0].description === 'clear sky' || weather.weather[0].description === 'few clouds') {
         return 'sunny'
       } if (weather.weather[0].description === 'broken clouds' || weather.weather[0].description === 'scattered clouds') {
         return 'cloudy'
-      } if (weather.weather[0].description === 'rain' || weather.weather[0].description === 'shower rain') {
+      } if (weather.weather[0].description === 'rain' || weather.weather[0].description === 'shower rain' || 'moderate rain') {
         return 'rain'
       } if (weather.weather[0].description === 'thunderstorm') {
         return 'thunderstorm'
       } if (weather.weather[0].description === 'snow') {
         return 'snow'
+      } if (weather.weather[0].description === 'overcast clouds') {
+        return 'overcast'
       } else {
         return 'app'
       }
@@ -69,7 +71,7 @@ const API_KEY = 'f1d7a51506ced100c8f5175e71c783e5';
       .then(res => res.json())
       .then(result => {
         setWeather(result)
-        // console.log(result);
+        console.log(result);
       });
   }
 
@@ -89,7 +91,7 @@ const API_KEY = 'f1d7a51506ced100c8f5175e71c783e5';
       <div>
       <Header />
       <Navbar />
-      <Searchbar query={query} search={search} handleChange={handleChange} handleClick={handleClick} handleClickLocate={fetchWeatherLocate}  />
+      <Searchbar query={query} search={search} handleChange={handleChange} handleClick={handleClick} />
       <Datebox weather={weather} location={location} />
       </div>
     </div>

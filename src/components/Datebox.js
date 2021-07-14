@@ -18,6 +18,9 @@ export const Datebox = ({ weather, location }) => {
     
 
 return (
+    // I can change the layout of the weather information, ex. Make the city name font bigger and bolder.
+    // I can add fa icons for the wind
+    // I can nest if statement if < sunrise && > sunset ........ for night mode pictures/background
         <div className="main-container text-white text-center bg-gray-400 bg-opacity-25 rounded-md m-auto mt-20 border-2 border-yellow-600 w-1/5 p-4 px-6">
             {(typeof weather.main != "undefined") ? (
                 <div className="city">
@@ -36,6 +39,8 @@ return (
                     </div>
                     <div>Wind Speed: {weather.wind.speed}mph</div>
                     <div>Wind Gust: {weather.wind.gust}mph</div>
+                    <div>{weather.sys.sunrise}</div>
+                    <div>{weather.sys.sunset}</div>
                 </div>
             ) : ('')}
         </div>

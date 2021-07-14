@@ -1,6 +1,6 @@
 
 
-const Searchbar = ({ query, search, handleChange, handleClick, handleClickLocate } ) => {
+const Searchbar = ({ query, search, handleChange, handleClick, } ) => {
     
 
 
@@ -13,9 +13,6 @@ const Searchbar = ({ query, search, handleChange, handleClick, handleClickLocate
                 <div className="p-4 border-2 border-purple-600">
                     <button className="enter bg-blue-500 text-white rounded-full p-2 hover:bg-blue-400 focus:outline-none w-12 h-12 flex items-center justify-center" onClick={handleClick}>
                         Search
-                    </button>
-                    <button className="bg-green-600 text-white rounded-full p-2 hover:bg-blue-400 focus:outline-none w-12 h-12 flex items-center justify-center" onClick={handleClickLocate}>
-                        Location
                     </button>
                 </div>
             </div>
