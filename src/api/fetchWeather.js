@@ -9,20 +9,9 @@ export const fetchWeather = async (query) => {
             q: query,
             units: 'imperial',
             APPID: API_KEY,
-            // zip: query,
         }
     });
 
         return data;
     }
   
-
-
-
-// Or for the URL, I can just have the real URL (no variable) with lat & lon template literal in the path.
-// Watch video on how to store the variables for (params for function query, lat, & lon)
-
-// export const fetchByLocation = async (crd) => {
-//     const data1 = navigator.geolocation.getCurrentPosition(success, error, options);
-//     console.log(`${crd.latitude}`)
-//     }

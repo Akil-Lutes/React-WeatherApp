@@ -1,6 +1,4 @@
-// import { Searchbar } from './components/Searchbar'
 
-// {Math.round(weather.main.temp)}
 
 export const Datebox = ({ weather }) => {
 
