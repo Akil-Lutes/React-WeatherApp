@@ -1,18 +1,15 @@
 import Header from './components/Header'
 import Navbar from './components/Navbar'
 import Searchbar from './components/Searchbar'
-// import { Styles } from './components/Styles'
 import Datebox from './components/Datebox'
 import React, { useState, useEffect } from 'react';
 import { fetchWeather } from './api/fetchWeather'
-// import { fetchByLocation } from './api/fetchWeather'
 
 
 
 const App = () => {
   const [weather, setWeather] = useState({});
   const [query, setQuery] = useState('');
-  const [location, setLocation] = useState({});
 
 const URL1 = 'https://api.openweathermap.org/data/2.5/weather';
 const API_KEY = 'f1d7a51506ced100c8f5175e71c783e5';
@@ -92,7 +89,7 @@ const API_KEY = 'f1d7a51506ced100c8f5175e71c783e5';
       <Header />
       <Navbar />
       <Searchbar query={query} search={search} handleChange={handleChange} handleClick={handleClick} />
-      <Datebox weather={weather} location={location} />
+      <Datebox weather={weather} />
       </div>
     </div>
   );
@@ -101,9 +98,5 @@ const API_KEY = 'f1d7a51506ced100c8f5175e71c783e5';
 export default App;
 
 // ADD Default props ***************
-      
-  // return JSON.stringify(weather)
- 
- // try another useEffect. But I know I have to make 2 API calls for sure. promise.all (both calls will run parallel)
 
 
