@@ -1,5 +1,4 @@
 import Header from './components/Header'
-import Navbar from './components/Navbar'
 import Searchbar from './components/Searchbar'
 import Datebox from './components/Datebox'
 import React, { useState, useEffect } from 'react';
@@ -40,7 +39,7 @@ const API_KEY = 'f1d7a51506ced100c8f5175e71c783e5';
   }
 
 // I can nest if statement if < sunrise && > sunset ........ for night mode pictures/background
-  const backgroundImg = (weather) => { 
+  const backgroundImg = () => { 
     if (typeof weather.main != "undefined") {
       if (weather.weather[0].description === 'clear sky' || weather.weather[0].description === 'few clouds') {
         return 'sunny'
@@ -83,11 +82,11 @@ const API_KEY = 'f1d7a51506ced100c8f5175e71c783e5';
 
   return (
     <div 
-      className={backgroundImg(weather) }
+      className={`
+      ${backgroundImg(weather)}`}
      >
       <div>
       <Header />
-      <Navbar />
       <Searchbar query={query} search={search} handleChange={handleChange} handleClick={handleClick} />
       <Datebox weather={weather} />
       </div>

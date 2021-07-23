@@ -37,17 +37,11 @@ return (
                     </div>
                     <div>Wind Speed: {weather.wind.speed}mph</div>
                     <div>Wind Gust: {weather.wind.gust}mph</div>
-                    <div></div>
-                    <div></div>
                 </div>
             ) : ('')}
         </div>
-    // </div>
 );
 }
 
-
-
-// {weather.sys.sunset}
 
 export default Datebox
