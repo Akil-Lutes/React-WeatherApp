@@ -1,6 +1,6 @@
 
 
-export const Datebox = ({ weather }) => {
+export const Datebox = ({query, weather }) => {
 
     const dateBuilder = (d) => {
         let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];

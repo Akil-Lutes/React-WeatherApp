@@ -1,30 +1,79 @@
 import Header from './components/Header'
 import Searchbar from './components/Searchbar'
 import Datebox from './components/Datebox'
-import React, { useState, useEffect } from 'react';
-import { fetchWeather } from './api/fetchWeather'
+import React, { useState, useEffect} from 'react';
 
 
 
 const App = () => {
   const [weather, setWeather] = useState({});
   const [query, setQuery] = useState('');
+  const [value, setValue] = useState('')
+
+
 
 const URL1 = 'https://api.openweathermap.org/data/2.5/weather';
 const API_KEY = 'f1d7a51506ced100c8f5175e71c783e5';
 
+// I API called inside handleChange method inside if statement when I press entered, passed as prop
   const handleChange = (e) => { 
-    setQuery(e.target.value)
+    if(e.key === 'Enter') {
+    fetch(`${URL1}?q=${query}&units=imperial&APPID=${API_KEY}`)
+        .then(res => res.json())
+        .then(result => {
+          setWeather(result);
+          setQuery('');
+          console.log(result);
+        });
+      }
+        setQuery(e.target.value)
   }
 
-  
-  const search = async (e) => {
-    const data = await fetchWeather(query);
+  useEffect(() =>{
+    const cleanTimeout = setTimeout(() => {
+     
+      console.log('Value changed')
+    }, 3000)
 
+    return () => {
+      console.log('cleanup function running')
+      clearTimeout(cleanTimeout)
+    }
+  }, [value]);
+
+  const handleKeyPress = (e) => {
     if(e.key === 'Enter') {
-        setWeather(data)
-        setQuery('');
-    } 
+      fetch(`${URL1}?q=${query}&units=imperial&APPID=${API_KEY}`)
+          .then(res => res.json())
+          .then(result => {
+            setWeather(result);
+            setQuery('');
+            console.log(result);
+          });
+        }
+  }
+
+// I can nest if statement if < sunrise && > sunset ........ for night mode pictures/background
+  const backgroundImg = ({weather}) => { 
+    if (typeof weather.main != "undefined") {
+      if (weather.weather[0].description === 'clear sky' || weather.weather[0].description === 'few clouds') {
+        return 'sunny'
+      } if (weather.weather[0].description === 'broken clouds' || weather.weather[0].description === 'scattered clouds') {
+        return 'cloudy'
+      } if (weather.weather[0].description === 'rain' || weather.weather[0].description === 'shower rain' || weather.weather[0].description === 'moderate rain' || weather.weather[0].description === 'very heavy rain') {
+        return 'rain'
+      } if (weather.weather[0].description === 'thunderstorm') {
+        return 'thunderstorm'
+      } if (weather.weather[0].description === 'snow') {
+        return 'snow'
+      } if (weather.weather[0].description === 'overcast clouds') {
+        return 'overcast'
+      }  else {
+        return 'app'
+      }
+    }
+
+    return backgroundImg;
   }
 
   const handleClick = () => {
@@ -38,28 +87,7 @@ const API_KEY = 'f1d7a51506ced100c8f5175e71c783e5';
     console.log("Button works");
   }
 
-// I can nest if statement if < sunrise && > sunset ........ for night mode pictures/background
-  const backgroundImg = () => { 
-    if (typeof weather.main != "undefined") {
-      if (weather.weather[0].description === 'clear sky' || weather.weather[0].description === 'few clouds') {
-        return 'sunny'
-      } if (weather.weather[0].description === 'broken clouds' || weather.weather[0].description === 'scattered clouds') {
-        return 'cloudy'
-      } if (weather.weather[0].description === 'rain' || weather.weather[0].description === 'shower rain' || 'moderate rain') {
-        return 'rain'
-      } if (weather.weather[0].description === 'thunderstorm') {
-        return 'thunderstorm'
-      } if (weather.weather[0].description === 'snow') {
-        return 'snow'
-      } if (weather.weather[0].description === 'overcast clouds') {
-        return 'overcast'
-      } else {
-        return 'app'
-      }
-    } 
-      return backgroundImg;
-  }
-
+  // Navigator Geolocation API Call
   const fetchWeatherLocate = (lat = 25, lon = 25) => {
     fetch(
       `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${API_KEY}&units=imperial`
@@ -83,19 +111,18 @@ const API_KEY = 'f1d7a51506ced100c8f5175e71c783e5';
   return (
     <div 
       className={`
-      ${backgroundImg(weather)}`}
+      ${backgroundImg({weather})}`}
      >
       <div>
       <Header />
-      <Searchbar query={query} search={search} handleChange={handleChange} handleClick={handleClick} />
+      <Searchbar query={query}  handleChange={handleChange} handleClick={handleClick} handleKeyPress={handleKeyPress} />
       <Datebox weather={weather} />
       </div>
     </div>
   );
+ 
 }
 
 export default App;
 
 // ADD Default props ***************
-
-

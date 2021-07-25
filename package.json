@@ -8,13 +8,14 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
+    "debounce": "^1.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "set HTTPS=true react-scripts && craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
