@@ -8,7 +8,6 @@ import React, { useState, useEffect} from 'react';
 const App = () => {
   const [weather, setWeather] = useState({});
   const [query, setQuery] = useState('');
-  const [value, setValue] = useState('')
 
 
 
@@ -29,18 +28,7 @@ const API_KEY = 'f1d7a51506ced100c8f5175e71c783e5';
         setQuery(e.target.value)
   }
 
-  useEffect(() =>{
-    const cleanTimeout = setTimeout(() => {
-     
-      console.log('Value changed')
-    }, 3000)
-
-    return () => {
-      console.log('cleanup function running')
-      clearTimeout(cleanTimeout)
-    }
-  }, [value]);
-
+  // 
   const handleKeyPress = (e) => {
     if(e.key === 'Enter') {
       fetch(`${URL1}?q=${query}&units=imperial&APPID=${API_KEY}`)
@@ -76,6 +64,7 @@ const API_KEY = 'f1d7a51506ced100c8f5175e71c783e5';
     return backgroundImg;
   }
 
+  // Search Button click function call
   const handleClick = () => {
     fetch(`${URL1}?q=${query}&units=imperial&APPID=${API_KEY}`)
         .then(res => res.json())
