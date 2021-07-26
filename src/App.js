@@ -100,7 +100,7 @@ const API_KEY = 'f1d7a51506ced100c8f5175e71c783e5';
   return (
     <div 
       className={`
-      ${backgroundImg({weather})}`}
+      ${backgroundImg({weather})} app`}
      >
       <div>
       <Header />

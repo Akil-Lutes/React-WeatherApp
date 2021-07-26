@@ -18,7 +18,7 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    "start": "set HTTPS=true SSL_CRT_FILE=localhost.pem SSL_KEY_FILE=localhost-key.pem react-scripts && craco start",
+    "start": "set HTTPS=true react-scripts && craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
