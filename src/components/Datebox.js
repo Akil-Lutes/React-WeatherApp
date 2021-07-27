@@ -20,6 +20,7 @@ return (
     // I can add fa icons for the wind
     // I can nest if statement if < sunrise && > sunset ........ for night mode pictures/background
         <div className="main-container text-white text-center bg-gray-400 bg-opacity-25 rounded-md m-auto mt-20 border-2 border-yellow-600 w-1/5 p-4 px-6">
+           
             {(typeof weather.main != "undefined") ? (
                 <div className="city">
                     <h2 className="city-name">
